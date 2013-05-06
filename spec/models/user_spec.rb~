@@ -1,0 +1,23 @@
+require 'spec_helper'
+
+describe User do
+
+  before do
+    @user = User.create!
+  end
+
+  describe "updating auto" do
+
+    before do
+      @car = Car.create!
+      @user.auto = @car
+      @user.save!
+    end
+
+    it "should update cars" do
+      @user.cars.should eq([@car])
+      @user.car_ids.should eq([@car.id])
+      @user.reload.cars.should eq([@car])
+    end
+  end
+end
